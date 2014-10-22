@@ -10,12 +10,7 @@
         <?foreach($tags[$post['post_id']] as $tag):?>
             <a href="#"><span class="label" style="background-color: #5bc0de"><?=$tag?></span></a>
         <? endforeach?>
-    <div class="pull-right">
-        <span class="label">alice</span> 
-        <span class="label">story</span> 
-        <span class="label">blog</span> 
-        <span class="label">personal</span>
-    </div>
+    
 </div>
 </div>
 <?endforeach?>

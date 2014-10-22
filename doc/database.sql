@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Okt 22, 2014 kell 02:01 PL
+-- Loomise aeg: Okt 22, 2014 kell 07:44 PL
 -- Serveri versioon: 5.6.17
 -- PHP versioon: 5.5.12
 
@@ -14,6 +14,20 @@ SET time_zone = "+00:00";
 --
 -- Andmebaas: `blog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabeli struktuur tabelile `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `author` varchar(25) NOT NULL,
+  `comment_text` text NOT NULL,
+  `comment_created` timestamp NOT NULL,
+  `post_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -55,6 +69,15 @@ CREATE TABLE IF NOT EXISTS `post_tag` (
   KEY `tag_id` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Andmete tõmmistamine tabelile `post_tag`
+--
+
+INSERT INTO `post_tag` (`post_id`, `tag_id`) VALUES
+(7, 1),
+(1, 2),
+(8, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -63,18 +86,20 @@ CREATE TABLE IF NOT EXISTS `post_tag` (
 
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
-  `tag_id` int(10) unsigned NOT NULL,
+  `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(25) NOT NULL,
   PRIMARY KEY (`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Andmete tõmmistamine tabelile `tag`
 --
 
 INSERT INTO `tag` (`tag_id`, `tag_name`) VALUES
-(0, 'test1'),
-(1, 'test1');
+(1, 'tag123'),
+(2, 'tag123'),
+(3, 'test'),
+(4, 'valmis');
 
 -- --------------------------------------------------------
 
