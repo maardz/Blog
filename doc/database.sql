@@ -3,22 +3,22 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2014 at 05:03 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Loomise aeg: Okt 22, 2014 kell 02:01 PL
+-- Serveri versioon: 5.6.17
+-- PHP versioon: 5.5.12
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `blog`
+-- Andmebaas: `blog`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post`
+-- Tabeli struktuur tabelile `post`
 --
 
 DROP TABLE IF EXISTS `post`;
@@ -30,19 +30,56 @@ CREATE TABLE IF NOT EXISTS `post` (
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `post`
+-- Andmete tõmmistamine tabelile `post`
 --
 
 INSERT INTO `post` (`post_id`, `post_subject`, `post_text`, `post_created`, `user_id`) VALUES
-(1, '', '', '2014-10-19 22:47:34', 1);
+(1, '', '', '2014-10-19 22:47:34', 1),
+(7, 'pealkiri', 'Slow-carb meggings Portland retro authentic, squid kogi freegan brunch church-key tousled plaid. Blue Bottle +1 cornhole, mustache jean shorts sriracha shabby chic heirloom mlkshk Godard wayfarers. Selfies meditation crucifix XOXO. Blog cray messenger bag beard 90''s, put a bird on it umami McSweeney''s raw denim ethical lo-fi Intelligentsia synth. Messenger bag jean shorts bespoke 8-bit, slow-carb keytar Odd Future crucifix tote bag sriracha hoodie. Echo Park tattooed meggings blog Schlitz quinoa. Godard Tumblr +1, Banksy blog jean shorts pour-over direct trade stumptown High Life small batch Pitchfork iPhone.', '2014-10-22 11:44:01', 1),
+(8, 'teine postitus veel', 'Occupy Helvetica Truffaut, direct trade banjo lomo Wes Anderson Kickstarter tofu. Dreamcatcher normcore cardigan occupy gentrify. Before they sold out photo booth PBR Pinterest crucifix forage. Pickled skateboard Tumblr Shoreditch, McSweeney''s street art Bushwick 3 wolf moon wolf roof party retro normcore irony tousled. Deep v polaroid next level Banksy. Photo booth whatever messenger bag, raw denim readymade organic food truck 90''s art party four loko Wes Anderson bespoke salvia Carles Blue Bottle. Shabby chic put a bird on it cliche banh mi Tonx selfies.', '2014-10-22 11:49:21', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tabeli struktuur tabelile `post_tag`
+--
+
+DROP TABLE IF EXISTS `post_tag`;
+CREATE TABLE IF NOT EXISTS `post_tag` (
+  `post_id` int(11) unsigned NOT NULL,
+  `tag_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`post_id`,`tag_id`),
+  KEY `tag_id` (`tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabeli struktuur tabelile `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE IF NOT EXISTS `tag` (
+  `tag_id` int(10) unsigned NOT NULL,
+  `tag_name` varchar(25) NOT NULL,
+  PRIMARY KEY (`tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Andmete tõmmistamine tabelile `tag`
+--
+
+INSERT INTO `tag` (`tag_id`, `tag_name`) VALUES
+(0, 'test1'),
+(1, 'test1');
+
+-- --------------------------------------------------------
+
+--
+-- Tabeli struktuur tabelile `user`
 --
 
 DROP TABLE IF EXISTS `user`;
@@ -59,19 +96,26 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `user`
+-- Andmete tõmmistamine tabelile `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `is_admin`, `password`, `active`, `email`, `deleted`) VALUES
 (1, 'demo', 0, 'demo', 1, '', 0);
 
 --
--- Constraints for dumped tables
+-- Tõmmistatud tabelite piirangud
 --
 
 --
--- Constraints for table `post`
+-- Piirangud tabelile `post`
 --
 ALTER TABLE `post`
   ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Piirangud tabelile `post_tag`
+--
+ALTER TABLE `post_tag`
+  ADD CONSTRAINT `post_tag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`),
+  ADD CONSTRAINT `post_tag_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
 SET FOREIGN_KEY_CHECKS=1;
