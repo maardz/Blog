@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Okt 22, 2014 kell 07:44 PL
+-- Loomise aeg: Nov 03, 2014 kell 04:02 PL
 -- Serveri versioon: 5.6.17
 -- PHP versioon: 5.5.12
 
@@ -23,11 +23,21 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
+  `comment_id` int(10) unsigned NOT NULL,
   `author` varchar(25) NOT NULL,
   `comment_text` text NOT NULL,
   `comment_created` timestamp NOT NULL,
-  `post_id` int(10) NOT NULL
+  `post_id` int(10) NOT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `post_id` (`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Andmete tõmmistamine tabelile `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `author`, `comment_text`, `comment_created`, `post_id`) VALUES
+(0, '', 'test test test', '2014-11-03 13:33:15', 0);
 
 -- --------------------------------------------------------
 
@@ -141,6 +151,6 @@ ALTER TABLE `post`
 -- Piirangud tabelile `post_tag`
 --
 ALTER TABLE `post_tag`
-  ADD CONSTRAINT `post_tag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`),
-  ADD CONSTRAINT `post_tag_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`);
+  ADD CONSTRAINT `post_tag_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+  ADD CONSTRAINT `post_tag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`);
 SET FOREIGN_KEY_CHECKS=1;

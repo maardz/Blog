@@ -1,7 +1,8 @@
 <div class="span8">
 	<?foreach ($tags as $tag):?><a href="tags/view/<?=$tag['tag_name']?>"><span class="label label-info"><?=$tag['tag_name']?></span></a><?endforeach?>
-    <h1><?=$post['post_subject']?></h1>
-    <p><?=$post['post_text']?></p>
+    <h1><?=$post['post_subject'] ?></h1>
+    <p><?=$post['post_text'] ?></p>
+    
     <div>
         <span class="badge badge-success"><?=$post['post_created']?></span>
         <div class="pull-right">
@@ -10,29 +11,36 @@
 	        <span class="label">blog</span> 
 	        <span class="label">personal</span>
         </div>
+        <hr>
     </div>
+   <h2>Comments</h2>
+<div class="list-group">
+
     <?foreach ($comments as $comment): ?>
-            <div class="commentBox">
-                <ul class="commentList">
-                    <li>
-                        <div class="commenterImage">
-                            <img src="http://lorempixel.com/50/50/people/6" />
-                        </div>
-                        <div class="commentText">
-                            <?=$comment['comment_created']?>
-                            <?=$comment['author']?>
-                            <p><?=$comment['comment_text']?></p>
-                        </div>
-                    </li>
-                </ul>
-                <form class="form-inline" method="post" role="form">
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Sinu kommentaar" name="data[comment_text]"/>
+        <div class="commentBox">
+            <ul class="commentList">
+                <li>
+                    <div class="commenterImage">
+                        <img src="http://lorempixel.com/50/50/people/6/" />
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-default" type="submit">Lisa</button>
+                    <div class="commentText">
+                        <?=$comment['comment_created']?>
+                        <?=$comment['author']?>
+                        <p><?=$comment['comment_text']?></p>
                     </div>
-                </form>
-            </div>
-        <?endforeach ?>
+                </li>
+            </ul>
+        </div>
+
+
+    <?endforeach ?>
+    <form class="form-inline" method="post" role="form">
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Sinu kommentaar" name="data[comment_text]"/>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default" type="submit">Lisa</button>
+        </div>
+    </form>
+
 </div>
