@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Nov 03, 2014 kell 04:02 PL
+-- Loomise aeg: Nov 03, 2014 kell 08:08 PL
 -- Serveri versioon: 5.6.17
 -- PHP versioon: 5.5.12
 
@@ -23,12 +23,10 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
-  `comment_id` int(10) unsigned NOT NULL,
   `author` varchar(25) NOT NULL,
   `comment_text` text NOT NULL,
   `comment_created` timestamp NOT NULL,
   `post_id` int(10) NOT NULL,
-  PRIMARY KEY (`comment_id`),
   KEY `post_id` (`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -36,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `comment` (
 -- Andmete tõmmistamine tabelile `comment`
 --
 
-INSERT INTO `comment` (`comment_id`, `author`, `comment_text`, `comment_created`, `post_id`) VALUES
-(0, '', 'test test test', '2014-11-03 13:33:15', 0);
+INSERT INTO `comment` (`author`, `comment_text`, `comment_created`, `post_id`) VALUES
+('Klaabu', 'mlx', '2014-11-03 13:33:15', 7);
 
 -- --------------------------------------------------------
 
